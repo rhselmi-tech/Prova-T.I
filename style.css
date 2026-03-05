@@ -1,0 +1,371 @@
+/* Reset e Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container Principal */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Card */
+.card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Títulos */
+h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    color: #2563eb;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.descricao {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+/* Logo */
+.logo-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+    border-radius: 10px;
+    animation: fadeIn 0.8s ease-in;
+}
+
+.logo-small {
+    max-width: 120px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Formulário */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Botões */
+.btn-primary {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Header da Prova */
+.header-prova {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.info-participante {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.info-participante p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.info-participante strong {
+    color: #333;
+}
+
+/* Timer */
+.timer {
+    text-align: center;
+    font-size: 1.2em;
+    color: #1e3a8a;
+    font-weight: 600;
+    padding: 10px;
+    background: #dbeafe;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/* Barra de Progresso */
+.progresso {
+    margin-bottom: 30px;
+}
+
+.progresso-barra {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progresso-preenchimento {
+    height: 100%;
+    background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.progresso-texto {
+    text-align: center;
+    color: #1e3a8a;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+/* Questões */
+.questao {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid #2563eb;
+    transition: all 0.3s ease;
+}
+
+.questao:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.questao h3 {
+    color: #333;
+    font-size: 1.1em;
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.questao textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.questao textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    background: white;
+}
+
+.questao textarea::placeholder {
+    color: #aaa;
+}
+
+/* Botão Enviar */
+.btn-enviar {
+    margin-top: 30px;
+    font-size: 1.2em;
+    padding: 18px;
+}
+
+/* Tela de Sucesso */
+.sucesso {
+    text-align: center;
+    padding: 60px 40px;
+}
+
+.icone-sucesso {
+    font-size: 5em;
+    margin-bottom: 20px;
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.mensagem-final {
+    color: #666;
+    font-size: 1.1em;
+    margin: 20px 0;
+}
+
+/* Classe Hidden */
+.hidden {
+    display: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .questao {
+        padding: 15px;
+    }
+
+    .questao h3 {
+        font-size: 1em;
+    }
+
+    .btn-primary {
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .info-participante {
+        font-size: 0.9em;
+    }
+
+    .timer {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.1em;
+    }
+
+    .questao textarea {
+        font-size: 0.95em;
+    }
+}
+
+/* Animação de Loading */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

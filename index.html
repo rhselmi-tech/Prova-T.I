@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Prova - Procedimentos Básicos de TI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Tela Inicial -->
+    <div id="telaInicial" class="container">
+        <div class="card">
+            <div class="logo-container">
+                <img src="img/logoSelmi.jpeg" alt="Selmi T.I" class="logo">
+            </div>
+            <h1>Mini Prova</h1>
+            <h2>Procedimentos Básicos de TI</h2>
+            <p class="descricao">Responda às questões dissertativas sobre suporte básico de TI</p>
+            
+            <div class="form-group">
+                <label for="nomeParticipante">Nome Completo:</label>
+                <input type="text" id="nomeParticipante" placeholder="Digite seu nome" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="setorParticipante">Setor/Departamento:</label>
+                <input type="text" id="setorParticipante" placeholder="Digite seu setor" required>
+            </div>
+            
+            <button class="btn-primary" onclick="iniciarProva()">Iniciar Prova</button>
+        </div>
+    </div>
+
+    <!-- Tela da Prova -->
+    <div id="telaProva" class="container hidden">
+        <div class="card">
+            <div class="logo-container">
+                <img src="img/logoSelmi.jpeg" alt="Selmi T.I" class="logo-small">
+            </div>
+            <div class="header-prova">
+                <h1>Prova em Andamento</h1>
+                <div class="info-participante">
+                    <p><strong>Nome:</strong> <span id="nomeDisplay"></span></p>
+                    <p><strong>Setor:</strong> <span id="setorDisplay"></span></p>
+                </div>
+                <div class="timer" id="timer">
+                    ⏱️ Tempo: <span id="tempoRestante">15:00</span>
+                </div>
+            </div>
+
+            <div class="progresso">
+                <div class="progresso-barra">
+                    <div class="progresso-preenchimento" id="progressoBar"></div>
+                </div>
+                <p class="progresso-texto" id="progressoTexto">Pergunta 1/10</p>
+            </div>
+
+            <form id="formProva">
+                <div class="questao">
+                    <h3>1. O que deve ser verificado primeiro quando a internet não está funcionando?</h3>
+                    <textarea id="q1" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>2. Qual procedimento fazer com o cabo de rede quando há falha de conexão?</h3>
+                    <textarea id="q2" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>3. Onde verificar erros diretamente na impressora?</h3>
+                    <textarea id="q3" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>4. O que fazer quando um documento fica preso na fila de impressão?</h3>
+                    <textarea id="q4" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>5. Como identificar se o problema da impressora é de rede?</h3>
+                    <textarea id="q5" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>6. O que fazer quando há papel preso na impressora?</h3>
+                    <textarea id="q6" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>7. Para que serve a configuração de impressão frente e verso?</h3>
+                    <textarea id="q7" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>8. O que é trocar o toner e quando isso deve ser feito?</h3>
+                    <textarea id="q8" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>9. O que são as portas da impressora (A, B, C, D)?</h3>
+                    <textarea id="q9" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <div class="questao">
+                    <h3>10. Quais procedimentos básicos devem ser feitos antes de chamar o suporte de TI?</h3>
+                    <textarea id="q10" rows="4" placeholder="Digite sua resposta aqui..." oninput="atualizarProgresso()"></textarea>
+                </div>
+
+                <button type="button" class="btn-primary btn-enviar" onclick="confirmarEnvio()">Enviar Prova</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Tela de Sucesso -->
+    <div id="telaSucesso" class="container hidden">
+        <div class="card sucesso">
+            <div class="icone-sucesso">✅</div>
+            <h1>Prova Enviada com Sucesso!</h1>
+            <p>Suas respostas foram registradas.</p>
+            <p class="mensagem-final">Obrigado por participar da avaliação!</p>
+            <button class="btn-primary" onclick="reiniciarProva()">Fazer Nova Prova</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
