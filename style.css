@@ -238,7 +238,7 @@ h2 {
 
 .alternativa {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     padding: 12px;
     border: 2px solid #e2e8f0;
@@ -247,15 +247,23 @@ h2 {
     color: #1f2937;
     cursor: pointer;
     transition: all 0.2s ease;
+    flex-wrap: wrap;
+    word-break: break-word;
+    min-height: 48px;
+}
+
+.alternativa input[type="radio"] {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    accent-color: #2563eb;
+    cursor: pointer;
 }
 
 .alternativa:hover {
     border-color: #93c5fd;
     background: #eff6ff;
-}
-
-.alternativa input[type="radio"] {
-    accent-color: #2563eb;
 }
 
 .alternativa:has(input[type="radio"]:checked) {
@@ -334,7 +342,6 @@ h2 {
 
     .alternativa {
         font-size: 0.95em;
-        align-items: flex-start;
     }
 
     .btn-primary {
