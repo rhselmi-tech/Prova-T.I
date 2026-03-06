@@ -1,8 +1,9 @@
 // Configuração do Google Sheets
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3tRG9tZe1M-n4FvACMVLt3e-jRYQDWPds1dIZUm5dM0J86jB4lHrXI6Xhi-1OTP4b/exec';
+const TEMPO_INICIAL_SEGUNDOS = 10 * 60;
 
 // Variáveis globais
-let tempoRestanteSegundos = 10 * 60; // 10 minutos
+let tempoRestanteSegundos = TEMPO_INICIAL_SEGUNDOS;
 let timerInterval;
 let nomeParticipante = '';
 let setorParticipante = '';
@@ -42,7 +43,10 @@ function iniciarProva() {
     
     // Focar na primeira questão
     setTimeout(() => {
-        document.getElementById('q1').focus();
+        const primeiraOpcao = document.querySelector('input[name="q1"][value="A"]');
+        if (primeiraOpcao) {
+            primeiraOpcao.focus();
+        }
     }, 300);
 }
 
@@ -98,8 +102,8 @@ function atualizarProgresso() {
     
     // Contar quantas perguntas foram respondidas
     for (let i = 1; i <= 10; i++) {
-        const resposta = document.getElementById(`q${i}`).value.trim();
-        if (resposta.length > 0) {
+        const respostaSelecionada = document.querySelector(`input[name="q${i}"]:checked`);
+        if (respostaSelecionada) {
             respondidas++;
         }
     }
@@ -119,8 +123,8 @@ function confirmarEnvio() {
     let naoRespondidas = [];
     
     for (let i = 1; i <= 10; i++) {
-        const resposta = document.getElementById(`q${i}`).value.trim();
-        if (resposta.length > 0) {
+        const respostaSelecionada = document.querySelector(`input[name="q${i}"]:checked`);
+        if (respostaSelecionada) {
             respondidas++;
         } else {
             naoRespondidas.push(i);
@@ -137,7 +141,10 @@ function confirmarEnvio() {
         
         if (!confirmar) {
             // Focar na primeira pergunta não respondida
-            document.getElementById(`q${naoRespondidas[0]}`).focus();
+            const primeiraOpcao = document.querySelector(`input[name="q${naoRespondidas[0]}"][value="A"]`);
+            if (primeiraOpcao) {
+                primeiraOpcao.focus();
+            }
             return;
         }
     } else {
@@ -164,16 +171,16 @@ async function enviarProva() {
     const dados = {
         nome: nomeParticipante,
         setor: setorParticipante,
-        q1: document.getElementById('q1').value.trim(),
-        q2: document.getElementById('q2').value.trim(),
-        q3: document.getElementById('q3').value.trim(),
-        q4: document.getElementById('q4').value.trim(),
-        q5: document.getElementById('q5').value.trim(),
-        q6: document.getElementById('q6').value.trim(),
-        q7: document.getElementById('q7').value.trim(),
-        q8: document.getElementById('q8').value.trim(),
-        q9: document.getElementById('q9').value.trim(),
-        q10: document.getElementById('q10').value.trim()
+        q1: (document.querySelector('input[name="q1"]:checked') || {}).value || '',
+        q2: (document.querySelector('input[name="q2"]:checked') || {}).value || '',
+        q3: (document.querySelector('input[name="q3"]:checked') || {}).value || '',
+        q4: (document.querySelector('input[name="q4"]:checked') || {}).value || '',
+        q5: (document.querySelector('input[name="q5"]:checked') || {}).value || '',
+        q6: (document.querySelector('input[name="q6"]:checked') || {}).value || '',
+        q7: (document.querySelector('input[name="q7"]:checked') || {}).value || '',
+        q8: (document.querySelector('input[name="q8"]:checked') || {}).value || '',
+        q9: (document.querySelector('input[name="q9"]:checked') || {}).value || '',
+        q10: (document.querySelector('input[name="q10"]:checked') || {}).value || ''
     };
     
     // Desabilitar botão de envio
@@ -241,7 +248,7 @@ function salvarBackupLocal(dados) {
 // Reiniciar prova
 function reiniciarProva() {
     // Resetar variáveis
-    tempoRestanteSegundos = 15 * 60;
+    tempoRestanteSegundos = TEMPO_INICIAL_SEGUNDOS;
     nomeParticipante = '';
     setorParticipante = '';
     
@@ -251,7 +258,10 @@ function reiniciarProva() {
     
     // Limpar respostas
     for (let i = 1; i <= 10; i++) {
-        document.getElementById(`q${i}`).value = '';
+        const alternativas = document.querySelectorAll(`input[name="q${i}"]`);
+        alternativas.forEach((alternativa) => {
+            alternativa.checked = false;
+        });
     }
     
     // Resetar progresso
