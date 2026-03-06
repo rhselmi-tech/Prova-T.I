@@ -1,6 +1,6 @@
 // Configuração do Google Sheets
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3tRG9tZe1M-n4FvACMVLt3e-jRYQDWPds1dIZUm5dM0J86jB4lHrXI6Xhi-1OTP4b/exec';
-const TEMPO_INICIAL_SEGUNDOS = 10 * 60;
+const TEMPO_INICIAL_SEGUNDOS = 5 * 60;
 
 // Variáveis globais
 let tempoRestanteSegundos = TEMPO_INICIAL_SEGUNDOS;
