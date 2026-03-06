@@ -12,6 +12,26 @@
  * 6. Copie a URL gerada e cole no arquivo script.js
  */
 
+const GABARITO = ['B', 'C', 'A', 'B', 'C', 'A', 'B', 'C', 'A', 'B'];
+const COR_ACERTO_FUNDO = '#dcfce7';
+const COR_ACERTO_FONTE = '#166534';
+const COR_ERRO_FUNDO = '#fee2e2';
+const COR_ERRO_FONTE = '#991b1b';
+
+function obterCoresRespostas(respostas) {
+  const backgrounds = respostas.map((resposta, indice) => {
+    const acertou = resposta === GABARITO[indice];
+    return acertou ? COR_ACERTO_FUNDO : COR_ERRO_FUNDO;
+  });
+
+  const fontColors = respostas.map((resposta, indice) => {
+    const acertou = resposta === GABARITO[indice];
+    return acertou ? COR_ACERTO_FONTE : COR_ERRO_FONTE;
+  });
+
+  return { backgrounds, fontColors };
+}
+
 function doPost(e) {
   try {
     // Obter a planilha ativa
@@ -23,16 +43,16 @@ function doPost(e) {
         'Data',
         'Nome',
         'Setor',
-        'Q1 - Verificar quando internet não funciona',
-        'Q2 - Procedimento com cabo de rede',
-        'Q3 - Verificar erros na impressora',
-        'Q4 - Documento preso na fila',
-        'Q5 - Identificar problema de rede da impressora',
-        'Q6 - Papel preso na impressora',
-        'Q7 - Impressão frente e verso',
-        'Q8 - Trocar toner',
-        'Q9 - Portas da impressora',
-        'Q10 - Procedimentos antes de chamar o TI'
+        'Q1 - B',
+        'Q2 - C',
+        'Q3 - A',
+        'Q4 - B',
+        'Q5 - C',
+        'Q6 - A',
+        'Q7 - B',
+        'Q8 - C',
+        'Q9 - A',
+        'Q10 - B'
       ]);
       
       // Formatar cabeçalho
@@ -69,6 +89,29 @@ function doPost(e) {
     const ultimaLinha = sheet.getLastRow();
     const celulData = sheet.getRange(ultimaLinha, 1);
     celulData.setNumberFormat('dd/mm/yyyy hh:mm:ss');
+
+    // Corrigir e colorir respostas (Q1..Q10)
+    const respostas = [
+      dados.q1,
+      dados.q2,
+      dados.q3,
+      dados.q4,
+      dados.q5,
+      dados.q6,
+      dados.q7,
+      dados.q8,
+      dados.q9,
+      dados.q10
+    ].map((resposta) => String(resposta || '').trim().toUpperCase());
+
+    const cores = obterCoresRespostas(respostas);
+
+    const rangeRespostas = sheet.getRange(ultimaLinha, 4, 1, 10);
+    rangeRespostas
+      .setBackgrounds([cores.backgrounds])
+      .setFontColors([cores.fontColors])
+      .setFontWeight('bold')
+      .setHorizontalAlignment('center');
     
     // Auto-ajustar largura das colunas (opcional)
     sheet.autoResizeColumns(1, 13);
@@ -108,20 +151,55 @@ function testarScript() {
       contents: JSON.stringify({
         nome: 'João da Silva',
         setor: 'Administrativo',
-        q1: 'Verificar a conexão com a internet e conferir os cabos de rede.',
-        q2: 'Retirar e conectar novamente o cabo de rede.',
-        q3: 'Na tela da impressora para identificar mensagens de erro.',
-        q4: 'Acessar a fila de impressão e cancelar ou reiniciar o documento.',
-        q5: 'Verificar se a impressora está conectada à rede e testando o ping.',
-        q6: 'Abrir a impressora cuidadosamente e remover o papel preso.',
-        q7: 'Para economizar papel imprimindo nos dois lados da folha.',
-        q8: 'Trocar o cartucho de toner quando a impressão estiver fraca ou com mensagem de toner baixo.',
-        q9: 'São as diferentes bandejas de alimentação de papel da impressora.',
-        q10: 'Verificar cabos, reiniciar equipamentos, conferir conexões básicas.'
+        q1: 'B',
+        q2: 'A',
+        q3: 'A',
+        q4: 'C',
+        q5: 'C',
+        q6: 'A',
+        q7: 'B',
+        q8: 'B',
+        q9: 'A',
+        q10: 'B'
       })
     }
   };
   
   const resultado = doPost(dadosTeste);
   Logger.log(resultado.getContent());
+}
+
+/**
+ * Reaplica as cores de acerto/erro em todas as linhas já registradas.
+ * Execute manualmente esta função no Apps Script quando precisar recalcular a planilha inteira.
+ */
+function colorirRespostasExistentes() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const ultimaLinha = sheet.getLastRow();
+
+  if (ultimaLinha < 2) {
+    Logger.log('Nenhuma resposta para colorir.');
+    return;
+  }
+
+  const valores = sheet.getRange(2, 4, ultimaLinha - 1, 10).getValues();
+
+  const backgrounds = valores.map((linha) => {
+    const respostas = linha.map((resposta) => String(resposta || '').trim().toUpperCase());
+    return obterCoresRespostas(respostas).backgrounds;
+  });
+
+  const fontColors = valores.map((linha) => {
+    const respostas = linha.map((resposta) => String(resposta || '').trim().toUpperCase());
+    return obterCoresRespostas(respostas).fontColors;
+  });
+
+  sheet
+    .getRange(2, 4, ultimaLinha - 1, 10)
+    .setBackgrounds(backgrounds)
+    .setFontColors(fontColors)
+    .setFontWeight('bold')
+    .setHorizontalAlignment('center');
+
+  Logger.log('Cores reaplicadas com sucesso para todas as respostas.');
 }
