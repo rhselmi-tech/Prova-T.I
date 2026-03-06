@@ -231,26 +231,37 @@ h2 {
     line-height: 1.6;
 }
 
-.questao textarea {
-    width: 100%;
+.alternativas {
+    display: grid;
+    gap: 10px;
+}
+
+.alternativa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding: 12px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #e2e8f0;
     border-radius: 8px;
-    font-size: 1em;
-    font-family: inherit;
-    resize: vertical;
-    transition: all 0.3s ease;
+    background: #ffffff;
+    color: #1f2937;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.questao textarea:focus {
-    outline: none;
+.alternativa:hover {
+    border-color: #93c5fd;
+    background: #eff6ff;
+}
+
+.alternativa input[type="radio"] {
+    accent-color: #2563eb;
+}
+
+.alternativa:has(input[type="radio"]:checked) {
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    background: white;
-}
-
-.questao textarea::placeholder {
-    color: #aaa;
+    background: #dbeafe;
+    font-weight: 600;
 }
 
 /* Botão Enviar */
@@ -321,6 +332,11 @@ h2 {
         font-size: 1em;
     }
 
+    .alternativa {
+        font-size: 0.95em;
+        align-items: flex-start;
+    }
+
     .btn-primary {
         padding: 12px;
         font-size: 1em;
@@ -348,8 +364,9 @@ h2 {
         font-size: 1.1em;
     }
 
-    .questao textarea {
-        font-size: 0.95em;
+    .alternativa {
+        font-size: 0.9em;
+        padding: 10px;
     }
 }
 
